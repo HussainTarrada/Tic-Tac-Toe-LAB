@@ -59,27 +59,43 @@ function checkForWinner(){
 }
 
 function checkForTie(){
-    if(board === "" || winner === true){
+    for(let i=0; i<=8; i++){
+    if(winner === true){
         tie = false
     }
-    else if(winner === false && board === ""){
+    else if(winner === false && board[i] !== ""){
         tie = true
         console.log(tie)
     }
     else{
         tie = false
     }
-
+    }
 }
 
+
+function updateMessage(){
+    if(winner === false && tie === false){
+        return
+    }
+    if(winner === false && tie === true){
+        console.log("Tie")
+        messageEl.innerText = "Tie"
+    }
+    else{
+        console.log("Congrats! You Won")
+        messageEl.innerText = "Congrats! You Won"
+        messageEl.style.color = "green"
+    }
+    }
 
 function updateBoard(event){
     console.log(turn)
     Number(event.target.id)
-    if(board[event.target.id] === ""){ // to check if square is empty
+    if(board[event.target.id] === ""){ // to check if square is empty or not
         if(board[event.target.id] !== "X" || board[event.target.id] !== "O"){
             board[event.target.id] = turn
-            const squareIndex = event.target.id
+            // const squareIndex = event.target.id
             console.log(board)
         }
     else {
@@ -107,17 +123,4 @@ squareEls.forEach((square)=>{
 console.log(board)
 
 
-function updateMessage(){
-if(winner === false && tie === false){
-    return
-}
-if(winner === false && tie === true){
-    console.log("Tie")
-    messageEl.innerText = "Tie"
-}
-else{
-    console.log("Congrats! You Won")
-    messageEl.innerText = "Congrats! You Won"
-    messageEl.style.color = "green"
-}
-}
+
